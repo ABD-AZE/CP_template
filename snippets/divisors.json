@@ -1,0 +1,70 @@
+{
+    "NumberOfDivisors": {
+        "prefix": "numdiv",
+        "body": [
+            "ll num_of_div(vector<pair<ll, ll>> &v, ll mod) {",
+            "\tll result = 1;",
+            "\tfor (ll i = 0; i < v.size(); i++)",
+            "\t\tresult = (result % mod * (v[i].second + 1)) % mod;",
+            "\treturn result;",
+            "}"
+        ],
+        "description": "Calculates the number of divisors modulo mod"
+    },
+    "SumOfDivisors": {
+        "prefix": "sumdiv",
+        "body": [
+            "ll sum_of_div(vector<pair<ll, ll>> &v, ll mod) {",
+            "\tvector<ll> for_mul;",
+            "\tfor (ll i = 0; i < v.size(); i++) {",
+            "\t\tll p = v[i].first;",
+            "\t\tll a = v[i].second;",
+            "\t\tfor_mul.push_back(((binexBest(p, a + 1, mod) - 1) * invUsingBinexBest(p - 1, mod)) % mod);",
+            "\t}",
+            "\tll result = 1;",
+            "\tfor (ll i = 0; i < for_mul.size(); i++)",
+            "\t\tresult = (result % mod * for_mul[i] % mod) % mod;",
+            "\treturn result;",
+            "}"
+        ],
+        "description": "Calculates the sum of divisors modulo mod"
+    },
+    "ProductOfDivisors": {
+        "prefix": "proddiv",
+        "body": [
+            "ll prod_of_div(vector<pair<ll, ll>> v, ll mod) {",
+            "\tll divs = 1, b = 0;",
+            "\tfor (ll i = 0; i < v.size(); i++) {",
+            "\t\tif (b == 0 && v[i].second % 2 == 1) {",
+            "\t\t\tb = 1;",
+            "\t\t\tdivs = (divs % (mod - 1) * ((v[i].second + 1) / 2)) % (mod - 1);",
+            "\t\t\tcontinue;",
+            "\t\t}",
+            "\t\tdivs = (divs % (mod - 1) * (v[i].second + 1)) % (mod - 1);",
+            "\t}",
+            "\tvector<ll> pows;",
+            "\tif (b == 1) {",
+            "\t\tfor (ll i = 0; i < v.size(); i++) {",
+            "\t\t\tll p = v[i].first;",
+            "\t\t\tll a = v[i].second;",
+            "\t\t\tpows.push_back((a * divs) % (mod - 1));",
+            "\t\t}",
+            "\t}",
+            "\telse {",
+            "\t\tfor (ll i = 0; i < v.size(); i++) {",
+            "\t\t\tll p = v[i].first;",
+            "\t\t\tll a = v[i].second;",
+            "\t\t\tpows.push_back((a / 2 * divs) % (mod - 1));",
+            "\t\t}",
+            "\t}",
+            "\tll result = 1;",
+            "\tfor (ll i = 0; i < pows.size(); i++) {",
+            "\t\tll p = v[i].first;",
+            "\t\tresult = (result * binexBest(p, pows[i], mod)) % mod;",
+            "\t}",
+            "\treturn result;",
+            "}"
+        ],
+        "description": "Calculates the product of divisors modulo mod"
+    }
+}
