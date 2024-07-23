@@ -1,0 +1,23 @@
+{
+    "MobiusFunction": {
+        "prefix": "mobius",
+        "body": [
+            "vl mob;",
+            "void mobius(int n) {",
+            "\tlinear_seive(n);",
+            "\tfor (int i = 0; i <= n; ++i) {",
+            "\t\tmob.pb(0);",
+            "\t}",
+            "\tmob[1] = 1;",
+            "\tfor (int i = 2; i <= n; ++i) {",
+            "\t\tif (lp[i] == i) mob[i] = -1;",
+            "\t\telse {",
+            "\t\t\tif ((i / lp[i]) % lp[i] == 0) mob[i] = 0;",
+            "\t\t\telse mob[i] = mob[lp[i]] * mob[i / lp[i]];",
+            "\t\t}",
+            "\t}",
+            "}"
+        ],
+        "description": "Calculates the Mobius function for numbers up to n"
+    }
+}
