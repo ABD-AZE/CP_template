@@ -1,0 +1,18 @@
+{
+    "ChineseRemainderTheorem": {
+        "prefix": "crt",
+        "body": [
+            "ll crt(vl md, vl nm) {",
+            "\tll i, p = 1, q, ans = 0, n = md.size();",
+            "\tfor (ll g : nm)",
+            "\t\tp *= g;",
+            "\tf(i, n) {",
+            "\t\tq = p / nm[i];",
+            "\t\tans += (md[i] * mod_inv(q, nm[i]) * q) % p;",
+            "\t}",
+            "\treturn ans % p;",
+            "}"
+        ],
+        "description": "Chinese Remainder Theorem implementation"
+    }
+}
