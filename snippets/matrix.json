@@ -1,0 +1,40 @@
+{
+    "MatrixMultiplication": {
+        "prefix": "matmul",
+        "body": [
+            "vector<vector<ll>> mat_mul(vector<vector<ll>> &v, vector<vector<ll>> &p, ll mod) {",
+            "\tll n = v.size();",
+            "\tvector<vector<ll>> result(n, vector<ll>(n, 0));",
+            "\tfor (ll i = 0; i < n; i++) {",
+            "\t\tfor (ll j = 0; j < n; j++) {",
+            "\t\t\tfor (ll k = 0; k < n; k++) {",
+            "\t\t\t\tresult[i][j] = (result[i][j] + (v[i][k] * p[k][j]) % mod) % mod;",
+            "\t\t\t}",
+            "\t\t}",
+            "\t}",
+            "\treturn result;",
+            "}"
+        ],
+        "description": "Performs matrix multiplication modulo mod"
+    },
+    "MatrixExponentiation": {
+        "prefix": "matexp",
+        "body": [
+            "vector<vector<ll>> mat_exp(vector<vector<ll>> &v, ll n, ll mod) {",
+            "\tvector<vector<ll>> ans(v.size(), vector<ll>(v.size(), 0));",
+            "\tfor (ll i = 0; i < v.size(); i++) {",
+            "\t\tans[i][i] = 1;",
+            "\t}",
+            "\twhile (n > 0) {",
+            "\t\tif (n % 2 == 1) {",
+            "\t\t\tans = mat_mul(ans, v, mod);",
+            "\t\t}",
+            "\t\tv = mat_mul(v, v, mod);",
+            "\t\tn /= 2;",
+            "\t}",
+            "\treturn ans;",
+            "}"
+        ],
+        "description": "Performs matrix exponentiation modulo mod"
+    }
+}
